@@ -4,9 +4,14 @@ import com.thiru.contract.ContractEmployee;
 import com.thiru.contract.ContractNetSalary;
 import com.thiru.dept.Department;
 import com.thiru.desg.Designation;
+import com.thiru.emp.EmployeeList;
 import com.thiru.fulltime.FullTimeEmployee;
 import com.thiru.fulltime.FullTimeNetSalary;
 import com.thiru.model.Employee;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /* Association: The connection between two classes that are set up through their objects.
   Association manages one-to-one, one-to-many, and many-to-many relationships.*/
@@ -22,11 +27,13 @@ public class Organisation {
         Designation designation = new Designation();
         FullTimeNetSalary fullTimeNetSalary = new FullTimeNetSalary();
         ContractNetSalary contractNetSalary = new ContractNetSalary();
+        EmployeeList employeeList = new EmployeeList();
 
         Employee contract = new ContractEmployee(2401, "Richard", 250, 10);
         Employee contract1 = new ContractEmployee(2402, "John", 250, 12);
         Employee fullTime = new FullTimeEmployee(2501, "Thiru", 300);
         Employee fullTime1 = new FullTimeEmployee(2502, "Raj", 300);
+
         System.out.println("All Departments are: " + department.getAllDepartment());
         System.out.println("All Designations are: " + designation.getAllDesignation());
         System.out.println(WHITE + "Contract Employee Salary Details:");
@@ -51,6 +58,7 @@ public class Organisation {
         System.out.println(BLUE + "FullTime Employee NetSalary " + fullTimeNetSalary.getNetSalary());
         //Contract Employees NetSalary
         System.out.println(BLUE + "Contract Employee NetSalary " + contractNetSalary.getNetSalary());
-
+        System.out.println("Employee Names start with 'A' : " +employeeList.getEmployeeNameFilter());
+        System.out.println("All Employees with Id: " +employeeList.getEmployeeIdWithNames());
     }
 }

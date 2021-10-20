@@ -7,7 +7,7 @@ public class Designation {
 
     public List<String> getAllDesignation() {
 
-        ArrayList<String> designation = new ArrayList<String>();
+        ArrayList<String> designation = new ArrayList<>();
 
         designation.add("Software Engineer");
         designation.add("Sr.Software Engineer");
