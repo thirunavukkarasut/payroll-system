@@ -28,17 +28,12 @@ public class EmployeeList {
         employee.put(1013, "Shiv");
         employee.put(1014, "Vivin");
 
-        Map<Integer, String> contractMap = employee.entrySet()
+        Map<Integer, String> filteredMap = employee.entrySet()
                 .stream().filter(x -> x.getKey() > 1007)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        System.out.println("Contract Employee List : " + contractMap);
+        System.out.println("Contract Employee List : " + filteredMap);
 
-        Map<Integer, String> fullTimeMap = employee.entrySet()
-                .stream().filter(x -> x.getKey() <= 1007)
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-        System.out.println("FullTime Employee List : " + fullTimeMap);
         /*for(Map.Entry m : employee.entrySet()) {
             System.out.println(m.getKey() + " " + m.getValue());
         }*/
