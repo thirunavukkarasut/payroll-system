@@ -4,6 +4,7 @@ import com.thiru.contract.ContractEmployee;
 import com.thiru.contract.ContractNetSalary;
 import com.thiru.dept.Department;
 import com.thiru.desg.Designation;
+import com.thiru.emp.EmployeeList;
 import com.thiru.fulltime.FullTimeEmployee;
 import com.thiru.fulltime.FullTimeNetSalary;
 import com.thiru.model.Employee;
@@ -22,6 +23,7 @@ public class Organisation {
         Designation designation = new Designation();
         FullTimeNetSalary fullTimeNetSalary = new FullTimeNetSalary();
         ContractNetSalary contractNetSalary = new ContractNetSalary();
+        EmployeeList employeeList = new EmployeeList();
 
         Employee contract = new ContractEmployee(2401, "Richard", 250, 10);
         Employee contract1 = new ContractEmployee(2402, "John", 250, 12);
@@ -51,6 +53,9 @@ public class Organisation {
         System.out.println(BLUE + "FullTime Employee NetSalary " + fullTimeNetSalary.getNetSalary());
         //Contract Employees NetSalary
         System.out.println(BLUE + "Contract Employee NetSalary " + contractNetSalary.getNetSalary());
+        System.out.println();
+        System.out.println("All Employee List: " + employeeList.getEmployeeIdWithNames());
+        System.out.println("Employee Name Starts with 'A': " + employeeList.getEmployeeNameFilter());
 
     }
 }
