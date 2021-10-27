@@ -1,4 +1,4 @@
-package com.org.payroll;
+package com.org.payroll.service;
 
 import java.util.Map;
 
