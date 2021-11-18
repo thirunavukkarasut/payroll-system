@@ -1,38 +1,76 @@
 package com.org.payroll.service;
 
-import com.org.payroll.service.PayrollService;
+import com.org.payroll.entity.Employee;
 
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class PayrollServiceImpl implements PayrollService {
 
+    private List<Employee> employeeList = Arrays.asList(new Employee(1680, "Thiru", "Sr.Software Engineer", 287.50),
+            new Employee(1681, "Raj", "Software Engineer", 186.50),
+            new Employee(1682, "Arun", "Software Engineer", 186.50),
+            new Employee(1683, "John", "Software Engineer", 156.50),
+            new Employee(1500, "Kate", "HR", 136.50),
+            new Employee(1501, "Lilly", "HR", 166.50),
+            new Employee(1401, "Vimal", "Finance Consultant", 186.50),
+            new Employee(1402, "Roney", "Finance Consultant", 216.50),
+            new Employee(1780, "Zaheer", "System Administrator", 220.50),
+            new Employee(1781, "Bostan", "System Administrator", 225.50),
+            new Employee(1521, "Smith", "Data Analyst", 315.40),
+            new Employee(1520, "Thakir", "Sr.Data Analyst", 350.60),
+            new Employee(1301, "Faiz", "DevOps Engineer", 360.30),
+            new Employee(1201, "Martin", "Scrum Master", 370.56),
+            new Employee(1135, "Linda", "System Architect", 780.45),
+            new Employee(1924, "Carolin", "Quality Analyst", 280.68),
+            new Employee(1926, "Densi", "Quality Analyst", 286.68),
+            new Employee(2462, "Evy", "Project Manager", 800.50),
+            new Employee(2486, "Hentry", "Assistant Manager ", 320),
+            new Employee(1058, "Nova", "Cloud Engineer", 560.58)
+    );
+    private List<String> designation = Arrays.asList("Software Engineer", "Software Engineer", "Software Engineer", "HR", "HR", "Finance Consultant",
+            "Finance Consultant", "System Administrator", "System Administrator", "Data Analyst", "Data Analyst", "Sr.Data Analyst", "Quality Analyst",
+            "Quality Analyst", "DevOps Engineer", "Scrum Master", "System Architect", "Cloud Engineer", "Assistant Manager", "Project Manager");
+    private int id;
+    private String name;
+    private double baseSalary;
+    private double annualSalary;
+    private String formattedSalary;
+    private String formattedAnnualSalary;
 
     @Override
-    public Map<Integer, String> getAllEmployeesWithId() {
-        HashMap<Integer, String> employee = new HashMap<>();
+    public List<Employee> getAllEmployeesWithId() {
 
-        employee.put(1001, "Amenda");
-        employee.put(1002, "Angela");
-        employee.put(1003, "Aaron");
-        employee.put(1004, "Bob");
-        employee.put(1005, "Claire");
-        employee.put(1006, "David");
-        employee.put(1007, "Dolly");
-        employee.put(1008, "Jack");
-        employee.put(1009, "Kuldeep");
-        employee.put(1010, "Lisa");
-        employee.put(1011, "Ram");
-        employee.put(1012, "Ricky");
-        employee.put(1013, "Shiv");
-        employee.put(1014, "Vivin");
-        employee.put(1015, "Mimi");
-        employee.put(1016, "Tuno");
-        employee.put(1017, "Irwin");
-        employee.put(1018, "Nuwan");
-        employee.put(1019, "Rajiv");
-        employee.put(1020, "Faiz");
+        return employeeList;
+    }
 
-        return employee;
+    @Override
+    public List<Employee> getEmployeesSortedByPaymentPerHour() {
+        return employeeList.stream().sorted(
+                (o1, o2) -> (int) (o1.getPaymentPerHour() - o2.getPaymentPerHour())).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> getDistinctDesignation() {
+        return designation.stream()
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Employee> getPaymentPerHourGreaterThan500() {
+        employeeList.stream().filter(emp -> emp.getPaymentPerHour() > 500).forEach(System.out::println);
+        return employeeList;
+    }
+
+    @Override
+    public Map<Object, Long> getEmployeesGroupByDgnCount() {
+        Map<Object, Long> groupingThanFilter = employeeList.stream().collect(Collectors.groupingBy(Employee::getDesignation, Collectors.counting()));
+        groupingThanFilter.forEach((designation,count) -> System.out.println(designation+ " : " +count));
+        return groupingThanFilter;
     }
 }
