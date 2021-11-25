@@ -12,6 +12,7 @@ public interface PayrollService {
      List<String> getDistinctDesignation();
      List<Employee> getPaymentPerHourGreaterThan500();
      Map<Object, Long> getEmployeesGroupByDgnCount();
+     List<String> getDesignationWithDesig_();
 
 
 }

@@ -21,6 +21,9 @@ public class Organisation {
         System.out.println("Employees group by designation :");
         System.out.println("================================");
         payrollService.getEmployeesGroupByDgnCount();
-
+        System.out.println("-----------------------------------------------------------");
+        System.out.println("Employees Designation with desig_ :");
+        System.out.println("================================");
+        System.out.println(payrollService.getDesignationWithDesig_());
     }
 }

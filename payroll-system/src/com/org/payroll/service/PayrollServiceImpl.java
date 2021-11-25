@@ -2,11 +2,11 @@ package com.org.payroll.service;
 
 import com.org.payroll.entity.Employee;
 
+import  java.util.*;
 import java.util.Arrays;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class PayrollServiceImpl implements PayrollService {
@@ -32,9 +32,7 @@ public class PayrollServiceImpl implements PayrollService {
             new Employee(2486, "Hentry", "Assistant Manager ", 320),
             new Employee(1058, "Nova", "Cloud Engineer", 560.58)
     );
-    private List<String> designation = Arrays.asList("Software Engineer", "Software Engineer", "Software Engineer", "HR", "HR", "Finance Consultant",
-            "Finance Consultant", "System Administrator", "System Administrator", "Data Analyst", "Data Analyst", "Sr.Data Analyst", "Quality Analyst",
-            "Quality Analyst", "DevOps Engineer", "Scrum Master", "System Architect", "Cloud Engineer", "Assistant Manager", "Project Manager");
+
     private int id;
     private String name;
     private double baseSalary;
@@ -50,27 +48,39 @@ public class PayrollServiceImpl implements PayrollService {
 
     @Override
     public List<Employee> getEmployeesSortedByPaymentPerHour() {
-        return employeeList.stream().sorted(
-                (o1, o2) -> (int) (o1.getPaymentPerHour() - o2.getPaymentPerHour())).collect(Collectors.toList());
+        return employeeList.stream()
+                    .sorted((o1, o2) -> (int) (o2.getPaymentPerHour() - o1.getPaymentPerHour()))
+                    .collect(Collectors.toList());
     }
 
     @Override
     public List<String> getDistinctDesignation() {
-        return designation.stream()
+        return employeeList.stream()
+                .map(Employee::getDesignation)
                 .distinct()
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Employee> getPaymentPerHourGreaterThan500() {
-        employeeList.stream().filter(emp -> emp.getPaymentPerHour() > 500).forEach(System.out::println);
+        employeeList.stream()
+                    .filter(emp -> emp.getPaymentPerHour() > 500)
+                    .forEach(System.out::println);
         return employeeList;
     }
 
     @Override
     public Map<Object, Long> getEmployeesGroupByDgnCount() {
-        Map<Object, Long> groupingThanFilter = employeeList.stream().collect(Collectors.groupingBy(Employee::getDesignation, Collectors.counting()));
-        groupingThanFilter.forEach((designation,count) -> System.out.println(designation+ " : " +count));
+        Map<Object, Long> groupingThanFilter = employeeList.stream()
+                    .collect(Collectors.groupingBy(Employee::getDesignation, Collectors.counting()));
+                     groupingThanFilter.forEach((designation,count) -> System.out.println(designation+ " : " +count));
         return groupingThanFilter;
+    }
+
+    @Override
+    public List<String> getDesignationWithDesig_() {
+        String prefix = "Desig_";
+        return employeeList.stream()
+                .map(e -> prefix.concat(e.getDesignation())).collect(Collectors.toList());
     }
 }
