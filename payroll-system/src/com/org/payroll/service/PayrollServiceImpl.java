@@ -81,6 +81,6 @@ public class PayrollServiceImpl implements PayrollService {
     public List<String> getDesignationWithDesig_() {
         String prefix = "Desig_";
         return employeeList.stream()
-                .map(e -> prefix.concat(e.getDesignation())).collect(Collectors.toList());
+                    .map(e -> prefix.concat(e.getDesignation())).collect(Collectors.toList());
     }
 }
